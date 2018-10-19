@@ -2,7 +2,7 @@
 /*
 Plugin Name: Alquemie Config
 Description: Wordpress Configuration Best Practices as defined by Chris Carrel
-Version: 0.1.0
+Version: 0.1.1
 Author: Chris Carrel
 Author URI: https://www.linkedin.com/in/chriscarrel
 License:     GPL3
@@ -38,30 +38,35 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
         private $_settings = array();
         
 		public function __construct() {
-
-			// self::includes();
+			self::includes();
 			self::hooks();
 		}
 
 		private static function includes() {
-
+            require_once dirname( __FILE__ ) . '/admin/alquemie-config-options.php';
 		}
 
 		private static function hooks() {
-            add_action( 'template_redirect', array( $this, 'remove_author_pages_page') );
-            add_filter( 'author_link', array( $this, 'remove_author_pages_link') );
+            if (checked(1, get_option('alquemie-config-author-url'), false)) {
+                add_action( 'template_redirect', array( __CLASS__, 'remove_author_pages_page') );
+                add_filter( 'author_link', array( __CLASS__, 'remove_author_pages_link') );
+            }
 
-            // remove version from head
-            remove_action('wp_head', 'wp_generator');
+            if (checked(1, get_option('alquemie-config-delay-rss'), false)) {
+                add_filter('posts_where', array(__CLASS__, 'delay_rss_feed' ) );
+            }
+         
+            if (checked(1, get_option('alquemie-config-remove-generator'), false)) {
+                // remove version from head
+                remove_action('wp_head', 'wp_generator');
+                // remove version from rss
+                add_filter('the_generator', '__return_empty_string');
+            }
 
-            // remove version from rss
-            add_filter('the_generator', '__return_empty_string');
+            
+            add_filter('admin_footer_text', array( __CLASS__, 'remove_footer_admin' )) ;
+            add_filter('gettext', array(__CLASS__, 'howdy_message'), 10, 3);
 
-            add_filter('admin_footer_text', array( $this, 'remove_footer_admin' )) ;
-
-            add_filter('gettext', array($this, 'howdy_message'), 10, 3);
-
-            add_filter('posts_where', array($this, 'delay_rss_feed' ) );
 		}
 
         public function remove_author_pages_page() {
@@ -77,9 +82,7 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
         }
     
         public function remove_footer_admin () {
-
-            echo "Authorized Users Only!";
-
+            echo get_option('alquemie-config-footer-msg', 'Authorized Users Only!');
         } 
           
         private function custom_message() {
@@ -94,19 +97,19 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
                     break;
                 
                 default:
-                    $message = 'Logged in as';
+                    $message = get_option('alquemie-config-welcome-msg', 'Logged in as');
             }
             
             return $message;
         }
             
-        public function howdy_message($translated_text, $text, $domain) {
-            $message = $this->custom_message();
+        public static function howdy_message($translated_text, $text, $domain) {
+            $message = self::custom_message();
             $new_message = str_replace('Howdy', $message, $text);
             return $new_message;
         }
             
-            //* Delay posts from appearing immediately in WordPress RSS feed
+        //* Delay posts from appearing immediately in WordPress RSS feed
         public function delay_rss_feed($where) {
             global $wpdb;
             
