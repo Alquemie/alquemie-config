@@ -47,16 +47,16 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
 		}
 
 		private static function hooks() {
-            if (checked(1, get_option('alquemie-config-author-url'), false)) {
+            if (!checked(1, get_option('alquemie-config-author-url'), false)) {
                 add_action( 'template_redirect', array( __CLASS__, 'remove_author_pages_page') );
                 add_filter( 'author_link', array( __CLASS__, 'remove_author_pages_link') );
             }
 
-            if (checked(1, get_option('alquemie-config-delay-rss'), false)) {
+            if (!checked(1, get_option('alquemie-config-delay-rss'), false)) {
                 add_filter('posts_where', array(__CLASS__, 'delay_rss_feed' ) );
             }
          
-            if (checked(1, get_option('alquemie-config-remove-generator'), false)) {
+            if (!checked(1, get_option('alquemie-config-remove-generator'), false)) {
                 // remove version from head
                 remove_action('wp_head', 'wp_generator');
                 // remove version from rss
