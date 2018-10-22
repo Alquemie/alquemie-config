@@ -63,13 +63,12 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
                 add_filter('the_generator', '__return_empty_string');
             }
 
-            
             add_filter('admin_footer_text', array( __CLASS__, 'remove_footer_admin' )) ;
             add_filter('gettext', array(__CLASS__, 'howdy_message'), 10, 3);
 
 		}
 
-        public function remove_author_pages_page() {
+        public static function remove_author_pages_page() {
             if ( is_author() ) {
                 global $wp_query;
                 $wp_query->set_404();
@@ -77,15 +76,15 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
             }
         }
 
-        public function remove_author_pages_link( $content ) {
+        public static function remove_author_pages_link( $content ) {
             return get_option( 'home' );
         }
     
-        public function remove_footer_admin () {
+        public static function remove_footer_admin () {
             echo get_option('alquemie-config-footer-msg', 'Authorized Users Only!');
         } 
           
-        private function custom_message() {
+        private static function custom_message() {
             $date = date('d-m');
             switch($date) {
                 case '03-14':
@@ -110,7 +109,7 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
         }
             
         //* Delay posts from appearing immediately in WordPress RSS feed
-        public function delay_rss_feed($where) {
+        public static function delay_rss_feed($where) {
             global $wpdb;
             
             if ( is_feed() ) {
@@ -122,8 +121,6 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
             return $where;
         }
 
-  
-        
 	}
 
    new Alquemie_Config();
