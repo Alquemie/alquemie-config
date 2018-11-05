@@ -2,6 +2,10 @@
 
 Relevant changes to the Alquemie Config project are documented below as a resource for users.
 
+## [0.1.2] - 2018-10-19
+### Changed
+- Context Fixes
+
 ## [0.1.1] - 2018-10-19
 ### Added
 - Admin Settings Page
