@@ -2,7 +2,7 @@
 /*
 Plugin Name: Alquemie Config
 Description: Wordpress Configuration Best Practices as defined by Chris Carrel
-Version: 0.1.2
+Version: 0.1.3
 Author: Chris Carrel
 Author URI: https://www.linkedin.com/in/chriscarrel
 License:     GPL3
@@ -87,7 +87,15 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
         private static function custom_message() {
             $date = date('d-m');
             switch($date) {
+                case '01-01':
+                    $message = 'Happy New Year';
+                    break;
+                
                 case '03-14':
+                    $message = '3.1415926535897';
+                    break;
+
+                case '03-17':
                     $message = 'Happy St Patrick\'s Day';
                     break;
 
