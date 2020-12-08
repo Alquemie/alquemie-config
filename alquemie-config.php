@@ -2,7 +2,7 @@
 /*
 Plugin Name: Alquemie Config
 Description: Wordpress Configuration Best Practices as defined by Chris Carrel
-Version: 0.1.7
+Version: 0.1.10
 Author: Chris Carrel
 Author URI: https://www.linkedin.com/in/chriscarrel
 License:     GPL3
@@ -44,6 +44,7 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
 
 		private static function includes() {
             require_once dirname( __FILE__ ) . '/admin/alquemie-config-options.php';
+            require_once dirname( __FILE__ ) . '/dev-only-plugins.php';
 		}
 
 		private static function hooks() {
@@ -63,6 +64,10 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
                 add_filter('the_generator', '__return_empty_string');
             }
 
+            if (!checked(1, get_option('alquemie-config-responsive-embeds'), false)) {
+                add_theme_support( 'responsive-embeds' );
+            }
+            
             add_filter('admin_footer_text', array( __CLASS__, 'remove_footer_admin' )) ;
             add_filter('gettext', array(__CLASS__, 'howdy_message'), 10, 3);
             add_action('wp_head', array(__CLASS__, 'kill_ie_compatiblity'), 0 );
@@ -105,8 +110,15 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
                 
                 case '07-06':
                     $message = 'Happy Donut Day';
-                    break;
 
+                case '04-07':
+                    $message = 'Happy 4th of July';
+                    break;
+                    
+                case '31-10':
+                    $message = 'Trick or Treat';
+                    break;
+                    
                 default:
                     $message = get_option('alquemie-config-welcome-msg', 'Logged in as');
             }

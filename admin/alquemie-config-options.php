@@ -69,6 +69,16 @@ class Alquemie_Config_Settings_Page {
 					'Disable' => 'Disable',
 				),
 				'desc' => 'Add WP Generator back to site <head>',
+			),
+			array(
+				'label' => 'Responsive Embeds',
+				'id' => 'alquemie-config-responsive-embeds',
+				'type' => 'checkbox',
+				'section' => 'bestpractices_section',
+				'options' => array(
+					'Disable' => 'Disable',
+				),
+				'desc' => 'Add responsive embeds option to theme',
             ),
             array(
 				'label' => 'Welcome Message',
