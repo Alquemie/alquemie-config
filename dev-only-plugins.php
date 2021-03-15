@@ -11,6 +11,10 @@ $plugins = array(
     'pantheon-hud/pantheon-hud.php'
     );
 
+$production_only = array (
+    'siteimprove/siteimprove.php'
+);
+
 if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
     
     if ($_ENV['PANTHEON_ENVIRONMENT'] !== 'live') {
@@ -32,6 +36,14 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
             }
         }
 
+        if ($_ENV['PANTHEON_ENVIRONMENT'] === 'live') {
+            foreach ($production_only as $plugin) {
+                if(is_plugin_inactive($plugin)) {
+                    activate_plugin($plugin);
+                }
+            }
+        }
+
         # Disable jetpack_development_mode
         if ( is_plugin_active('jetpack/jetpack.php') ) {
             // the plugin is active
@@ -46,6 +58,12 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
         foreach ($plugins as $plugin) {
             if(is_plugin_inactive($plugin)) {
                 activate_plugin($plugin);
+            }
+        }
+
+        foreach ($production_only as $plugin) {
+            if(is_plugin_active($plugin)) {
+                deactivate_plugins($plugin);
             }
         }
 

@@ -1,6 +1,7 @@
 {
     "name": "alquemie/alquemie-config",
     "description": "Wordpress Must-Use Plugin that tweaks site based on best practices as defined by Chris Carrel",
+    "version": "0.1.11",
     "authors": [
         {
             "name": "Chris Carrel",
@@ -9,9 +10,6 @@
     ],
     "license": "GPL-3.0+",
     "type": "wordpress-muplugin",
-    "require": {
-        "php": ">=7.0"
-    },
     "config": {
         "vendor-dir": "lib"
     }
