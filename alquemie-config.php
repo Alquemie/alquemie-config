@@ -2,7 +2,7 @@
 /*
 Plugin Name: Alquemie Config
 Description: Wordpress Configuration Best Practices as defined by Chris Carrel
-Version: 0.1.11
+Version: 0.2.0
 Author: Chris Carrel
 Author URI: https://www.linkedin.com/in/chriscarrel
 License:     GPL3
@@ -35,14 +35,20 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
 	 *
 	 */
 	class Alquemie_Config {
-        private $_settings = array();
-        
+        private static $_config;
+
 		public function __construct() {
+
 			self::includes();
 			self::hooks();
 		}
 
 		private static function includes() {
+            // path to your JSON file
+            $file = dirname( __FILE__ ) . '/config.json'; 
+            $data = file_get_contents($file); 
+            self::$_config = json_decode($data); 
+
             require_once dirname( __FILE__ ) . '/admin/alquemie-config-options.php';
             require_once dirname( __FILE__ ) . '/dev-only-plugins.php';
 		}
@@ -91,38 +97,19 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
           
         private static function custom_message() {
             $date = date('d-m');
-            switch($date) {
-                case '01-01':
-                    $message = 'Happy New Year';
-                    break;
-                
-                case '14-03':
-                    $message = 'Happy 3.1415926535897 Day';
-                    break;
+            $message = get_option('alquemie-config-welcome-msg', 'Logged in as');
 
-                case '17-03':
-                    $message = 'Happy St Patrick\'s Day';
-                    break;
+           foreach(self::$_config->holidays as $holiday)
+           {
+                if ($holiday->type == "fixed") {
+                    if ($holiday->day == $date ) $message = $holiday->message;
 
-                case '05-05':
-                    $message = 'Happy Cinco de Mayo';
-                    break;
-                
-                case '07-06':
-                    $message = 'Happy Donut Day';
+                } elseif ($holiday->type == "calculated") {
+                    $holidate = date('d-m', strtotime($holiday->day . " " . date("Y")));
+                    if ($holidate == $date ) $message = $holiday->message;
+                }
+           }
 
-                case '04-07':
-                    $message = 'Happy 4th of July';
-                    break;
-                    
-                case '31-10':
-                    $message = 'Trick or Treat';
-                    break;
-                    
-                default:
-                    $message = get_option('alquemie-config-welcome-msg', 'Logged in as');
-            }
-            
             return $message;
         }
             
@@ -146,7 +133,8 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
         }
 
         public static function kill_ie_compatiblity() {
-            echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
+            echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">'; 
+            echo "<!-- " . print_r(self::$_config) . " --->";
         }
 	}
 

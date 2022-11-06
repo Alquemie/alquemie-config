@@ -1,9 +1,11 @@
 # Changelog
 
 Relevant changes to the Alquemie Config project are documented below as a resource for users.
-## [0.1.9] - 2020-03-29
-### Added
-- Force Non-Production emails to route to Purdue Digital Marketing Team
+
+## [0.2.0] - 2022-11-06
+### Changed
+- Code Optimization
+- Dynamic day holidays added
 
 ## [0.1.8] - 2020-03-20
 ### Added
@@ -36,6 +38,3 @@ Relevant changes to the Alquemie Config project are documented below as a resour
 - Delay posts from RSS by 12 hours
 - Remove "Generator" header
 - Customized Dashboard Footer text
-
-### Changed
-- N/A

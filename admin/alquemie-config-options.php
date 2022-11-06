@@ -39,6 +39,7 @@ class Alquemie_Config_Settings_Page {
 		add_settings_section( 'bestpractices_section', 'Configure WordPress based on the "best practices" as determined by Chris Carrel.  ', array(), 'bestpractices' );
 	}
 	public function setup_fields() {
+
 		$fields = array(
 			array(
 				'label' => 'Remove Author URLs',
@@ -93,13 +94,15 @@ class Alquemie_Config_Settings_Page {
 				'type' => 'text',
 				'section' => 'bestpractices_section',
 				'placeholder' => 'Authorized Users Only!',
-			),
+			)
 		);
-		foreach( $fields as $field ){
+
+		foreach( $fields as $field ) {
 			add_settings_field( $field['id'], $field['label'], array( $this, 'field_callback' ), 'bestpractices', $field['section'], $field );
 			register_setting( 'bestpractices', $field['id'] );
 		}
 	}
+
 	public function field_callback( $field ) {
 		$value = get_option( $field['id'] );
 		switch ( $field['type'] ) {
@@ -114,7 +117,7 @@ class Alquemie_Config_Settings_Page {
 							$field['id'],
 							$field['type'],
 							$key,
-							checked($value[array_search($key, $value, true)], $key, false),
+							checked($value, $key, false), // checked($value[array_search($key, $value, true)], $key, false),
 							$label,
 							$iterator
 							);

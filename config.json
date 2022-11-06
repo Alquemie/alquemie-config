@@ -1,0 +1,79 @@
+{
+  "holidays": {
+    "new-years": {
+      "day": "01-01",
+      "type": "fixed",
+      "message": "Happy New Year"
+    },
+    "spring-forward": {
+      "day": "second sunday of march",
+      "type": "calculated",
+      "message": "Don't forget to change your clocks"
+    },
+    "pi-day": {
+      "day": "14-03",
+      "type": "fixed",
+      "message": "Happy 3.1415926535897 Day"
+    },
+    "st-patricks": {
+      "day": "17-03",
+      "type": "fixed",
+      "message": "Happy St Patrick's Day"
+    },
+    "may-force": {
+      "day": "04-05",
+      "type": "fixed",
+      "message": "May the 4th be with you"
+    },
+    "cinco-mayo": {
+      "day": "05-05",
+      "type": "fixed",
+      "message": "Happy Cinco de Mayo"
+    },
+    "unofficial-start": {
+      "day": "last monday of may",
+      "type": "calculated",
+      "message": "Welcome to Summer"
+    },
+    "donut-day": {
+      "day": "07-06",
+      "type": "fixed",
+      "message": "Happy Donut Day"
+    },
+    "july-forth": {
+      "day": "04-07",
+      "type": "fixed",
+      "message": "Happy 4th of July"
+    },
+    "unofficial-summer": {
+      "day": "first monday of september",
+      "type": "calculated",
+      "message": "Unofficial End of Summer"
+    },
+    "halloween": {
+      "day": "31-10",
+      "type": "fixed",
+      "message": "Trick or Treak"
+    },
+    "veterans": {
+      "day": "11-11",
+      "type": "fixed",
+      "message": "Thank you Veterans"
+    },
+    "fall-back": {
+      "day": "first sunday of november",
+      "type": "calculated",
+      "message": "Enjoy the EXTRA sleep?"
+    },
+    "thanksgiving": {
+      "day": "fourth thursday of november",
+      "type": "calculated",
+      "message": "Happy Thanksgiving"
+    },
+    "christmas": {
+      "day": "25-12",
+      "type": "fixed",
+      "message": "Merry Christmas"
+    }
+  }
+}

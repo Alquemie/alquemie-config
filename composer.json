@@ -1,7 +1,7 @@
 {
     "name": "alquemie/alquemie-config",
     "description": "Wordpress Must-Use Plugin that tweaks site based on best practices as defined by Chris Carrel",
-    "version": "0.1.11",
+    "version": "0.2.0",
     "authors": [
         {
             "name": "Chris Carrel",
