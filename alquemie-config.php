@@ -2,7 +2,7 @@
 /*
 Plugin Name: Alquemie Config
 Description: Wordpress Configuration Best Practices as defined by Chris Carrel
-Version: 0.2.0
+Version: 0.2.1
 Author: Chris Carrel
 Author URI: https://www.linkedin.com/in/chriscarrel
 License:     GPL3
@@ -134,7 +134,6 @@ if ( ! class_exists( 'Alquemie_Config' ) ) :
 
         public static function kill_ie_compatiblity() {
             echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">'; 
-            echo "<!-- " . print_r(self::$_config) . " --->";
         }
 	}
 
