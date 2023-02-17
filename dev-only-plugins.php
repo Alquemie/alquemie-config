@@ -15,18 +15,10 @@ $production_only = array (
     'siteimprove/siteimprove.php'
 );
 
-if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
+if (defined('HOSTING_ENVIRONMENT') && php_sapi_name() != 'cli') {
     
-    if ($_ENV['PANTHEON_ENVIRONMENT'] !== 'live') {
-        /*
-            'wp-reroute-email/wp-reroute-email.php'
-        */
-        # Only email end users from live environment
-        add_filter('wp_mail', function( $parms ){ $parms['to'] ='digital-marketing@groups.purdue.edu'; return $parms; });
-    }
-
     # Live-specific configs
-    if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], array( 'live','test' ) ) ) {
+    if ( in_array( HOSTING_ENVIRONMENT, array( 'live','test' ) ) ) {
 
         # Disable Development Plugins
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
@@ -36,7 +28,7 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
             }
         }
 
-        if ($_ENV['PANTHEON_ENVIRONMENT'] === 'live') {
+        if (HOSTING_ENVIRONMENT === 'live') {
             foreach ($production_only as $plugin) {
                 if(is_plugin_inactive($plugin)) {
                     activate_plugin($plugin);
