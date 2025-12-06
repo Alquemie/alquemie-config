@@ -2,6 +2,11 @@
 
 Relevant changes to the Alquemie Config project are documented below as a resource for users.
 
+## [0.3.0] - 2025-12-06
+### Changed
+- Code Optimization
+- WP 6.9 Compatibility
+- 
 ## [0.2.0] - 2022-11-06
 ### Changed
 - Code Optimization

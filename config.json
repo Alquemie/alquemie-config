@@ -45,6 +45,11 @@
       "type": "fixed",
       "message": "Happy 4th of July"
     },
+    "celebrate-chris": {
+      "day": "22-08",
+      "type": "fixed",
+      "message": "Thank Chris for this project"
+    },
     "unofficial-summer": {
       "day": "first monday of september",
       "type": "calculated",
