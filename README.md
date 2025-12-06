@@ -4,7 +4,7 @@ Used to configure WordPress installs based on "best practices" determined by Chr
 
 ## Description
 
-Maintaining consistency across a large network of WordPress websites is challenging.  This plugin was created to have a single plugin that applies all of the "best practices" that have been learned over 10 years of WordPress development.
+Maintaining consistency across a large network of WordPress websites is challenging.  This plugin was created to have a single plugin that applies all of the "best practices" that have been learned over 20 years of WordPress development.
 
 ## Installation
 
